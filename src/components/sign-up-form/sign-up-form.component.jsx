@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -23,6 +24,7 @@ const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields)
     const { displayName, email, password, confirmPassword} = formFields;
 
+
     const resetFormFields = () => {
         setFormFields(defaultFormFields)
     }
@@ -39,9 +41,14 @@ const handleSubmit = async(e) => {
         resetFormFields()
         alert('New account has been created')
     } catch(error) {
-        if(error.code === 'auth/email-already-in-use') {
-            alert('Cannot create user. Email is already in use')
-    }
+        switch(error.code) {
+            case 'auth/weak-password': 
+                alert('Password is to weak. Password should be at least 6 characters.')
+                break
+            case 'auth/email-already-in-use':
+                alert('Cannot create user. Email is already in use')
+                break
+        }    
 }
 }
 

@@ -8,7 +8,7 @@
 /* eslint-disable react/function-component-definition */
 /* eslint-disable import/no-extraneous-dependencies */
 import { useState } from "react"
-import { createUserDocumentFromAuth, signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils"
+import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils"
 import FormInput from "../form-input/form-input.component"
 import Button from "../button/button.component"
 import './sign-in-form.styles.scss'
@@ -22,6 +22,7 @@ const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields)
     const { email, password } = formFields;
 
+
     const resetFormFields = () => {
         setFormFields(defaultFormFields)
     }
@@ -30,9 +31,8 @@ const handleSubmit = async(e) => {
     e.preventDefault();
     
     try {
-        const response = await signInAuthUserWithEmailAndPassword(email, password)
-        console.log(response)
-        resetFormFields()
+        await signInAuthUserWithEmailAndPassword(email, password)
+        resetFormFields();
     } catch(error) {
         switch(error.code) {
             case 'auth/wrong-password': 
@@ -45,8 +45,7 @@ const handleSubmit = async(e) => {
 }
 }
 const logGoogleUser = async() => {
-    const {user} = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
 }
 
     const handleChange = (e) => {
