@@ -3,19 +3,14 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/function-component-definition */
-import { Routes, Route, } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Navigation from './routes/navigation/navigation.component';
 import Home from './routes/home/home.component';
 import Authentification from './routes/authentication/authentication.component';
+import Shop from './routes/shop/shop.component';
 
 import './categories.styles.scss';
-
-
-
-const Shop = () => {
-  return <h1>I am the shop page</h1>;
-};
 
 const App = () => {
   return (
