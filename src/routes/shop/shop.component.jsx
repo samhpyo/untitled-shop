@@ -1,26 +1,26 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react/jsx-fragments */
 /* eslint-disable arrow-body-style */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/function-component-definition */
 
-import { useContext } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import { ProductsContext } from '../../contexts/products.context';
-import ProductCard from '../../components/product-card/product-card.component';
+import CategoriesPreview from '../categories-preview/categories-preview.component';
+import Category from '../category/category.component';
 
 import './shop.styles.scss';
 
-const Shop =() => {
-    const { products } = useContext(ProductsContext)
+const Shop = () => {
 
     return (
-        <div className='products-container'>
-            {products.map((product) => (
-                <ProductCard key={product.id} product={product}/>
-            ))}
-        </div>
-    )
+        <Routes>
+            <Route index element={<CategoriesPreview />} />
+            <Route path=':category' element={<Category/>} />
+        </Routes>
+    );
 }
 
 export default Shop;
