@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const MainContainer = styled.div`
   width: 100%;
   height: 100%;
-  
 `;
 
 export const Video = styled.video`
@@ -32,8 +31,9 @@ export const Span = styled.span`
   height: fit;
   opacity: 0.2;
   color: white;
-   
+
   &:hover {
     opacity: 1;
+    cursor: pointer;
   }
 `;
