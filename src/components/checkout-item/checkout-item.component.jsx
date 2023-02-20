@@ -8,8 +8,9 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/function-component-definition */
 
-import { useContext } from 'react';
-import { CartContext } from '../../contexts/cart.context';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCartItems } from '../../store/cart/cart.selector';
+import { addItemToCart, removeItemFromCart, removeAllFromCart } from '../../store/cart/cart.action';
 
 import {
   CheckoutItemContainer,
@@ -23,8 +24,9 @@ import {
 
 const CheckoutItem = ({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
-  const { addItemToCart, removeItemFromCart, removeAllFromCart } =
-    useContext(CartContext);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+
   return (
     <CheckoutItemContainer>
       <ImageContainer>
@@ -32,12 +34,12 @@ const CheckoutItem = ({ cartItem }) => {
       </ImageContainer>
       <Base> {name} </Base>
       <Quantity>
-        <Arrow onClick={() => removeItemFromCart(cartItem)}>&#10094;</Arrow>
+        <Arrow onClick={() => dispatch(removeItemFromCart(cartItems, cartItem))}>&#10094;</Arrow>
         <Value>{quantity}</Value>
-        <Arrow onClick={() => addItemToCart(cartItem)}>&#10095;</Arrow>
+        <Arrow onClick={() => dispatch(addItemToCart(cartItems, cartItem))}>&#10095;</Arrow>
       </Quantity>
       <Base> {price} </Base>
-      <RemoveButton onClick={() => removeAllFromCart(cartItem)}>
+      <RemoveButton onClick={() => dispatch(removeAllFromCart(cartItems, cartItem))}>
         &#10005;
       </RemoveButton>
     </CheckoutItemContainer>
